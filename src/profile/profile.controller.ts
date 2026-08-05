@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ProfileCreateDTO } from './dto/create-profile.dto';
 import { ProfileUpdateDTO } from './dto/update-profile.dto';
 
@@ -33,4 +44,9 @@ export class ProfileController {
       location: updateProfileDTO.location,
     };
   }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  remove(@Param('id') id: string) {}
 }
