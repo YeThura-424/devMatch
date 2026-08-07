@@ -31,7 +31,7 @@ export class ProfileController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return { id };
+    return this.profileService.findOne(id);
   }
 
   @Post()

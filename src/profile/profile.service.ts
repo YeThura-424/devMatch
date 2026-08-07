@@ -69,4 +69,8 @@ export class ProfileService {
   findAll() {
     return this.profiles;
   }
+
+  findOne(id: string) {
+    return this.profiles.find((item) => item.id === id);
+  }
 }
