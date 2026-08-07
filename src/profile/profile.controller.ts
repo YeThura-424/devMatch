@@ -8,18 +8,25 @@ import {
   Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import { ProfileCreateDTO } from './dto/create-profile.dto';
 import { ProfileUpdateDTO } from './dto/update-profile.dto';
+import { ProfileService } from './profile.service';
 
 @Controller('profile')
 export class ProfileController {
+  constructor(private profileService: ProfileService) {}
+
   // normal get for all profile .
   // testing with Query
+  // @Get()
+  // findAll(@Query('age') age: number, @Query('location') location: string) {
+  //   return [{ age, location }];
+  // }
+
   @Get()
-  findAll(@Query('age') age: number, @Query('location') location: string) {
-    return [{ age, location }];
+  findAll() {
+    return this.profileService.findAll();
   }
 
   @Get(':id')
