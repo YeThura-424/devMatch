@@ -99,4 +99,16 @@ export class ProfileService {
 
     return null;
   }
+
+  remove(id: string) {
+    const profileIndex = this.profiles.findIndex(
+      (profile) => profile.id === id,
+    );
+
+    if (profileIndex !== -1) {
+      this.profiles.splice(profileIndex, 1);
+    }
+
+    return {};
+  }
 }

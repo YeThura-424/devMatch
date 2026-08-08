@@ -45,6 +45,7 @@ export class ProfileController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  remove(@Param('id') id: string) {}
+  remove(@Param('id') id: string) {
+    return this.profileService.remove(id);
+  }
 }
