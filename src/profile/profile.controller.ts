@@ -36,11 +36,7 @@ export class ProfileController {
 
   @Post()
   create(@Body() createProfileDTO: ProfileCreateDTO) {
-    return {
-      name: createProfileDTO.name,
-      age: createProfileDTO.age,
-      location: createProfileDTO.location,
-    };
+    return this.profileService.create(createProfileDTO);
   }
   @Put(':id')
   update(@Body() updateProfileDTO: ProfileUpdateDTO, @Param('id') id: string) {

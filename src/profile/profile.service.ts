@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { ProfileCreateDTO } from './dto/create-profile.dto';
 
 @Injectable()
 export class ProfileService {
@@ -72,5 +73,12 @@ export class ProfileService {
 
   findOne(id: string) {
     return this.profiles.find((item) => item.id === id);
+  }
+
+  create(createProfileData: ProfileCreateDTO) {
+    return this.profiles.push({
+      id: randomUUID(),
+      ...createProfileData,
+    });
   }
 }
