@@ -1,19 +1,37 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ProfileCreateDTO } from './dto/create-profile.dto';
 import { ProfileUpdateDTO } from './dto/update-profile.dto';
+import { ProfileService } from './profile.service';
 
 @Controller('profile')
 export class ProfileController {
+  constructor(private profileService: ProfileService) {}
+
   // normal get for all profile .
   // testing with Query
+  // @Get()
+  // findAll(@Query('age') age: number, @Query('location') location: string) {
+  //   return [{ age, location }];
+  // }
+
   @Get()
-  findAll(@Query('age') age: number, @Query('location') location: string) {
-    return [{ age, location }];
+  findAll() {
+    return this.profileService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return { id };
+    return this.profileService.findOne(id);
   }
 
   @Post()
@@ -33,4 +51,9 @@ export class ProfileController {
       location: updateProfileDTO.location,
     };
   }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  remove(@Param('id') id: string) {}
 }
