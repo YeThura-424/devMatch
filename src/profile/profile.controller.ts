@@ -36,24 +36,16 @@ export class ProfileController {
 
   @Post()
   create(@Body() createProfileDTO: ProfileCreateDTO) {
-    return {
-      name: createProfileDTO.name,
-      age: createProfileDTO.age,
-      location: createProfileDTO.location,
-    };
+    return this.profileService.create(createProfileDTO);
   }
   @Put(':id')
   update(@Body() updateProfileDTO: ProfileUpdateDTO, @Param('id') id: string) {
-    return {
-      id,
-      name: updateProfileDTO.name,
-      age: updateProfileDTO.age,
-      location: updateProfileDTO.location,
-    };
+    return this.profileService.update(id, updateProfileDTO);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  remove(@Param('id') id: string) {}
+  remove(@Param('id') id: string) {
+    return this.profileService.remove(id);
+  }
 }
