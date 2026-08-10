@@ -68,8 +68,14 @@ export class ProfileService {
     },
   ];
 
-  findAll() {
-    return this.profiles;
+  findAll(name: string, location: string) {
+    const profile = this.profiles.filter(
+      (profile) =>
+        profile.name == name.toLocaleLowerCase() ||
+        profile.location == location.toLocaleLowerCase(),
+    );
+
+    return profile;
   }
 
   findOne(id: string) {
