@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
   Query,
@@ -13,6 +14,7 @@ import {
 import { ProfileCreateDTO } from './dto/create-profile.dto';
 import { ProfileUpdateDTO } from './dto/update-profile.dto';
 import { ProfileService } from './profile.service';
+import type { UUID } from 'crypto';
 
 @Controller('profile')
 export class ProfileController {
@@ -31,7 +33,7 @@ export class ProfileController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseUUIDPipe) id: UUID) {
     return this.profileService.findOne(id);
   }
 
@@ -40,13 +42,16 @@ export class ProfileController {
     return this.profileService.create(createProfileDTO);
   }
   @Put(':id')
-  update(@Body() updateProfileDTO: ProfileUpdateDTO, @Param('id') id: string) {
+  update(
+    @Body() updateProfileDTO: ProfileUpdateDTO,
+    @Param('id', ParseUUIDPipe) id: UUID,
+  ) {
     return this.profileService.update(id, updateProfileDTO);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseUUIDPipe) id: UUID) {
     return this.profileService.remove(id);
   }
 }
