@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ProfileCreateDTO } from './dto/create-profile.dto';
 import { ProfileUpdateDTO } from './dto/update-profile.dto';
@@ -25,8 +26,8 @@ export class ProfileController {
   // }
 
   @Get()
-  findAll() {
-    return this.profileService.findAll();
+  findAll(@Query('name') name: string, @Query('location') location: string) {
+    return this.profileService.findAll(name, location);
   }
 
   @Get(':id')
